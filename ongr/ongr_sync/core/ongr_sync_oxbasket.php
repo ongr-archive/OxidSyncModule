@@ -35,10 +35,15 @@ class ongr_sync_oxbasket extends ongr_sync_oxbasket_parent
     protected function getSyncData()
     {
         $currency = $this->getBasketCurrency();
+        $sign = $currency->sign;
+        json_encode($sign);
+        if (json_last_error()) {
+            $sign = '';
+        }
 
         if (count($this->getContents()) > 0) {
             return array(
-                'amount' => $this->getFPrice() . ' ' . $currency->sign
+                'amount' => $this->getFPrice() . ' ' . $sign
             );
         }
 
