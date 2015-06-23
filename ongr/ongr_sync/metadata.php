@@ -47,6 +47,13 @@ $aModule = array(
         'ONGRUrlHelper' => 'ongr/ongr_sync/ONGR/ONGRUrlHelper.php',
     ),
     'templates' => array(),
-    'settings' => array(),
+    'settings'      => [
+        [
+            'group' => 'ONGR',
+            'name' => 'sRootUrl',
+            'type' => 'str',
+            'value' => 'http://test.dev/',
+        ],
+    ],
     'blocks' => array()
 );
