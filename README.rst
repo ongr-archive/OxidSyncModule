@@ -1,8 +1,7 @@
-Oxid sync module
+OXID sync module
 ================
 
-This replaces oxid frontend with ongr site. Most request will be redirected to a new site, only adding product to cart
-will be done in oxid. And ONGR site will know about cart from ``ongr_basket`` cookie and user data will be available in
+This replaces OXID frontend with ongr site. Most request will be redirected to a new site, only adding product to cart will be done in OXID. And ONGR site will know about cart from ``ongr_basket`` cookie and user data will be available in
 ``ongr_user`` cookie.
 
 Installation
@@ -15,7 +14,9 @@ Usage
 ~~~~~
 
 Prepare SEO urls for export/sync to ongr platform.
-This will iterate trough all articles and generate all possible SEO url links for article.
+Iterate trough articles, categories and content to generate all possible SEO url links:
+
+articles:
 
 .. code-block:: php
 
@@ -24,5 +25,31 @@ This will iterate trough all articles and generate all possible SEO url links fo
     $list->selectString('select * from oxarticles');
 
     foreach ($list as $article) {
-        $article->save();
+        $article->getLink();
     }
+
+categories:
+    
+.. code-block:: php
+    
+    $list = oxNew('oxlist');
+    $list->init('oxcategory');
+    $list->selectString('select * from oxcategories');
+    
+    foreach ($list as $category) {
+        $category->getLink();
+    }
+    
+and content:
+
+.. code-block:: php
+
+    $list = oxNew('oxlist');
+    $list->init('oxcontent');
+    $list->selectString('select * from oxcontents');
+    
+    foreach ($list as $content) {
+        $content->getLink();
+    }
+    
+Don't forget to iterate through all subshops and languages.
